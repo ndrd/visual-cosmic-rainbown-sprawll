@@ -1,0 +1,23 @@
+dependencies:
+- rpm:
+  - gcc-c++
+  - glibc-devel
+  - automake
+  - autoconf
+  - valgrind
+  - gdb
+  - strace
+- rpm:
+  - vim-nerdtree
+  - vim-enhanced
+  - vim-command-t
+  - vim-X11
+  - ctags
+  - vim-taglist
+devassistant_version: 0.10.3
+original_kwargs:
+  github: ndrd
+  name: /home/vronsky/Projects/visual-cosmic-rainbown-sprawll
+  vim: true
+project_type:
+- cpp
