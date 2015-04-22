@@ -11,11 +11,38 @@
 using namespace cv;
 using namespace std;
 
-void detect_by_sift(Mat img, vector<KeyPoint> &keypoints);
-void detect_by_surf(Mat img, vector<KeyPoint> &keypoints);
-void detect_by_fast(Mat img, vector<KeyPoint> &keypoints);
-void detect_by_orb(Mat img, vector<KeyPoint> &keypoints);
-void detect_by_mser(Mat img, vector<KeyPoint> &keypoints);
+enum Detector 
+{
+	__SIFT 	= 1,
+	__SURF 	= 2,
+	__FAST 	= 3,
+	__BRISK = 4,
+	__ORB   = 5,
+	__FREAK = 6,
+};
 
+enum Descriptor
+{
+	_SIFT 	= 10,
+	_SURF 	= 20,
+	_BRIEF 	= 30,
+	_BRISK 	= 40,
+	_ORB   	= 50,
+	_FREAK 	= 60,
+};
+
+enum Matcher
+{
+	BF 		= 100,
+	BF_L1 	= 200,
+	BF_HAM 	= 300,
+	BF_HAM2 = 400,
+	FLANN  	= 500,
+};
+
+
+void detect_by(Detector type, Mat img, vector<KeyPoint> &keypoints);
+void descript_by(Descriptor type, Mat img, vector<KeyPoint> keypoints, Mat &descriptors);
+void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches );
 
 #endif

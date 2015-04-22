@@ -5,34 +5,113 @@
 #include "opencv2/nonfree/nonfree.hpp"
 #include "image_features.hpp"
 
-void detect_by_sift(Mat img, vector<KeyPoint> &key_points)
+void descript_by(Descriptor type, Mat img, vector<KeyPoint> keypoints, Mat &descriptors)
 {
-	SIFT sift;
-	sift(img, Mat(), key_points, cv::noArray());
+	string name;
+
+	switch(type)
+	{
+		case _SIFT:
+			name = "SIFT";
+			break;
+
+		case _SURF:
+			name = "SURF";
+			break;
+
+		case _BRIEF:
+			name = "BRIEF";
+			break;
+
+		case _BRISK:
+			name = "BRISK";
+			break;
+
+		case _ORB:
+			name = "ORB";
+			break;
+
+		case _FREAK:
+			name = "FREAK";
+			break;
+	}
+
+	Ptr<DescriptorExtractor> descriptor = DescriptorExtractor::create(name);
+	descriptor->compute(img, keypoints, descriptors);
 }
 
-void detect_by_surf(Mat img, vector<KeyPoint> &key_points)
+void detect_by(Detector type, Mat img, vector<KeyPoint> &keypoints)
 {
-	SURF surf;
-	surf(img, Mat(), key_points, cv::noArray());
+	string name;
+
+	switch(type)
+	{
+		case __SIFT:
+			name = "SIFT";
+			break;
+
+		case __SURF:
+			name = "SURF";
+			break;
+
+		case __FAST:
+			name = "FAST";
+			break;
+
+		case __BRISK:
+			name = "BRISK";
+			break;
+
+		case __ORB:
+			name = "ORB";
+			break;
+
+		case __FREAK:
+			name = "FREAK";
+			break;
+
+		default:
+			cout << "No se encontro el detector\n";
+			break;
+	}
+
+	Ptr<FeatureDetector> detector = FeatureDetector::create(name);
+	detector->detect(img, keypoints);
 }
 
-void detect_by_fast(Mat img, vector<KeyPoint> &key_points)
+void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches )
 {
-	int threshold = 20;
-	FAST(img, key_points, threshold	);
-}
+	string name;
 
-void detect_by_orb(Mat img, vector<KeyPoint> &key_points)
-{
-	int threshold = 20;
-	ORB orb;
-	orb(img, Mat(), key_points, cv::noArray());
-}
+	switch(type)
+	{		
 
-void detect_by_mser(Mat img, vector<KeyPoint> &key_points)
-{
-	int threshold = 20;
-	BRISK mser;
-	mser(img, Mat(), key_points, cv::noArray());
+		case BF:
+			name = "BruteForce";
+			break;
+
+		case BF_L1:
+			name = "BruteForce-L1";
+			break;
+
+		case BF_HAM:
+			name = "BruteForce-Hamming";
+			break;
+
+		case BF_HAM2:
+			name = "BruteForce-Hamming(2)";
+			break;
+
+		case FLANN:
+			name = "FlannBased";
+			break;
+
+		default:
+			cout << "No se encontro el emparejador\n";
+			break;
+
+	}
+
+	Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create(name);
+	matcher->match(descriptor1, descriptor2, matches);
 }

@@ -15,8 +15,8 @@ int main(int argc, char** argv)
 
     vector<KeyPoint> key_points, key_points2;
 
-    detect_by_sift(img, key_points);
-    detect_by_mser(img, key_points2);
+    detect_by(__SURF, img, key_points);
+    detect_by(__SIFT, img, key_points2);
 
     Mat output_img, output_img2;
     drawKeypoints(img, key_points, output_img);

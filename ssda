@@ -4,7 +4,7 @@
 "SURF" – SURF (nonfree module)
 "ORB" – ORB
 "BRISK" – BRISK
-"MSER" – MSER
+"brisk" – brisk
 "GFTT" – GoodFeaturesToTrackDetector
 "HARRIS" – GoodFeaturesToTrackDetector with Harris detector enabled
 "Dense" – DenseFeatureDetector
