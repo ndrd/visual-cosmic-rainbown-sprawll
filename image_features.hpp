@@ -23,26 +23,48 @@ enum Detector
 
 enum Descriptor
 {
-	_SIFT 	= 10,
-	_SURF 	= 20,
-	_BRIEF 	= 30,
-	_BRISK 	= 40,
-	_ORB   	= 50,
-	_FREAK 	= 60,
+	_SIFT 	= 1,
+	_SURF 	= 2,
+	_BRIEF 	= 3,
+	_BRISK 	= 4,
+	_ORB   	= 5,
+	_FREAK 	= 6,
 };
 
 enum Matcher
 {
-	BF 		= 100,
-	BF_L1 	= 200,
-	BF_HAM 	= 300,
-	BF_HAM2 = 400,
-	FLANN  	= 500,
+	BF 		= 1,
+	BF_L1 	= 2,
+	BF_HAM 	= 3,
+	BF_HAM2 = 4,
+	FLANN  	= 5,
+};
+
+struct Combination
+{
+	Detector detector;
+	Descriptor descriptor;
+	Matcher matcher;
+};
+
+struct ImageData
+{
+	Mat img1;
+	Mat img2;
+	vector<KeyPoint> kp1;
+	vector<KeyPoint> kp2;
+	Mat desc1;
+	Mat desc2;
+	vector<DMatch> matches;
+
 };
 
 
 void detect_by(Detector type, Mat img, vector<KeyPoint> &keypoints);
 void descript_by(Descriptor type, Mat img, vector<KeyPoint> keypoints, Mat &descriptors);
-void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches );
+void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches);
+void generate_combinations(vector<Combination> &combs);
+void run_combination(Combination comb, ImageData data);
+string combination_name(Combination comb);
 
 #endif

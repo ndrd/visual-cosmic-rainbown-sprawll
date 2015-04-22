@@ -8,11 +8,31 @@ using namespace std;
 int main(int argc, char** argv)
 {
 
-    if(argc < 2)
+    if(argc < 3)
         return -1;
 
     Mat img = imread(argv[1]);
+    Mat img2 = imread(argv[2]);
 
+    vector<Combination> combinations;
+    generate_combinations(combinations);
+
+    ImageData data;
+    data.img1 = img;
+    data.img2 = img2;
+
+    cout << "\nRuning " << combinations.size() << "\n";
+
+    for (int i = 0; i < combinations.size(); ++i)
+    {
+        try
+        {
+            run_combination(combinations[i], data);
+        } 
+        catch(exception &e){}
+    }
+
+/*
     vector<KeyPoint> key_points, key_points2;
 
     detect_by(__SURF, img, key_points);
@@ -30,6 +50,6 @@ int main(int argc, char** argv)
 
    
     destroyWindow("Image2");
-
+*/
     return 0;
 }

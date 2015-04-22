@@ -32,6 +32,14 @@ opencv2/features2d/features2d.hpp
 opencv2/nonfree/nonfree.hpp
 /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/opencv2/nonfree/nonfree.hpp
 
+/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/rainbown-sprawl.cpp
+iostream
+-
+opencv2/opencv.hpp
+/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/opencv2/opencv.hpp
+image_features.hpp
+/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/image_features.hpp
+
 /usr/local/include/opencv2/calib3d/calib3d.hpp
 opencv2/core/core.hpp
 /usr/local/include/opencv2/calib3d/opencv2/core/core.hpp
