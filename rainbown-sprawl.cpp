@@ -1,10 +1,9 @@
+#include <iostream>
 #include "opencv2/opencv.hpp"
-#include "opencv2/nonfree/nonfree.hpp"
+#include "image_features.hpp"
 
 using namespace cv;
 using namespace std;
-
-
 
 int main(int argc, char** argv)
 {
@@ -14,20 +13,23 @@ int main(int argc, char** argv)
 
     Mat img = imread(argv[1]);
 
-    SIFT sift;
-    vector<KeyPoint> key_points;
+    vector<KeyPoint> key_points, key_points2;
 
-    Mat descriptors;
-    sift(img, Mat(), key_points, descriptors);
+    detect_by_sift(img, key_points);
+    detect_by_mser(img, key_points2);
 
-    Mat output_img;
+    Mat output_img, output_img2;
     drawKeypoints(img, key_points, output_img);
+    drawKeypoints(img, key_points2, output_img2);
 
     namedWindow("Image");
     imshow("Image", output_img);
+    namedWindow("Image2");
+    imshow("Image2", output_img2);
     waitKey(0);
-    destroyWindow("Image");
+
+   
+    destroyWindow("Image2");
 
     return 0;
 }
-

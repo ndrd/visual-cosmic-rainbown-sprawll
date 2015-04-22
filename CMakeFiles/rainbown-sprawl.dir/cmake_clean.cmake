@@ -1,4 +1,5 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/rainbown-sprawl.dir/image_features.cpp.o"
   "CMakeFiles/rainbown-sprawl.dir/rainbown-sprawl.cpp.o"
   "rainbown-sprawl.pdb"
   "rainbown-sprawl"

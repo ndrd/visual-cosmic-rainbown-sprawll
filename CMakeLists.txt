@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 project( rainbown-sprawl )
 find_package( OpenCV  REQUIRED )
-add_executable(rainbown-sprawl rainbown-sprawl.cpp )
+add_executable(rainbown-sprawl  image_features.cpp rainbown-sprawl.cpp )
 target_link_libraries( rainbown-sprawl ${OpenCV_LIBS} )

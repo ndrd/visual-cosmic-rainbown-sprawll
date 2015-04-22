@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/image_features.cpp" "/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles/rainbown-sprawl.dir/image_features.cpp.o"
   "/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/rainbown-sprawl.cpp" "/home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles/rainbown-sprawl.dir/rainbown-sprawl.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

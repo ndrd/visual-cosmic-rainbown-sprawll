@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/ndrd/Projects/visual-cosmic-rainbown-sprawll
 CMakeFiles/rainbown-sprawl.dir/all:
 	$(MAKE) -f CMakeFiles/rainbown-sprawl.dir/build.make CMakeFiles/rainbown-sprawl.dir/depend
 	$(MAKE) -f CMakeFiles/rainbown-sprawl.dir/build.make CMakeFiles/rainbown-sprawl.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles  1 2
 	@echo "Built target rainbown-sprawl"
 .PHONY : CMakeFiles/rainbown-sprawl.dir/all
 
@@ -69,7 +69,7 @@ all: CMakeFiles/rainbown-sprawl.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rainbown-sprawl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/rainbown-sprawl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ndrd/Projects/visual-cosmic-rainbown-sprawll/CMakeFiles 0
 .PHONY : CMakeFiles/rainbown-sprawl.dir/rule
