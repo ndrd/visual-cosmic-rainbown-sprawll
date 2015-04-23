@@ -127,11 +127,11 @@ void generate_combinations(vector<Combination> &combs)
 {
 	Combination comb;
 
-	for (int i = __SIFT; i < __FREAK; ++i)
+	for (int i = __SIFT; i <= __FREAK; ++i)
 	{
-		for (int j = _SIFT; j < __FREAK; ++j)
+		for (int j = _SIFT; j <= __FREAK; ++j)
 		{
-			for (int k = BF; k < FLANN; ++k)
+			for (int k = BF; k <= FLANN; ++k)
 			{
 				comb.detector = static_cast<Detector>(i);
 				comb.descriptor = static_cast<Descriptor>(j);
@@ -144,17 +144,60 @@ void generate_combinations(vector<Combination> &combs)
 	}
 }
 
-void run_combination(Combination comb, ImageData data)
+void run_combination(Combination comb, Mat img1, Mat img2,  TestData &data)
 {
-	cout << combination_name(comb) << endl;
+	data.combination_name =  combination_name(comb);
 
-	detect_by(comb.detector, data.img1, data.kp1);
-	detect_by(comb.detector, data.img2, data.kp2);
+	double t = (double)getTickCount();
 
-	descript_by(comb.descriptor, data.img1, data.kp1, data.desc1);
-	descript_by(comb.descriptor, data.img2, data.kp2, data.desc2);
+	detect_by(comb.detector, img1, data.kp1);
+	detect_by(comb.detector, img2, data.kp2);
+
+	descript_by(comb.descriptor, img1, data.kp1, data.desc1);
+	descript_by(comb.descriptor, img2, data.kp2, data.desc2);
 
 	match_by(comb.matcher, data.desc1, data.desc2, data.matches);
+
+	data.time = ((double)getTickCount() - t) / getTickFrequency();
+
+}
+
+void run_tests(vector<Combination> combinations, string image_path, 
+            vector<string> images_path, vector<TestData> &results)
+{
+    cout << "Running " << combinations.size() << " combinations "
+        << " over " << images_path.size() << "images." << endl;
+
+    Mat img1 = imread(image_path);
+
+    for (int i = 0; i < images_path.size(); ++i)
+    {
+        Mat img2 = imread(images_path[i]);
+
+        for (int j = 0; j < combinations.size(); ++j)
+        {
+            try
+            {
+            	TestData data;
+
+        		data.image_1_name = image_path;
+        		data.image_2_name = images_path[i];
+
+                run_combination(combinations[i], img1, img2, data);
+                print_results(data);
+                results.push_back(data);
+
+            } 
+            catch(exception &e){}
+        }
+
+    }
+
+}
+
+void print_results(TestData data) {
+	cout << data.combination_name << " with " << data.image_1_name << " and "
+		<< data.image_2_name << " find " << data.matches.size() << " matches, takes " << data.time << " seconds" << endl;
 }
 
 string combination_name(Combination comb)

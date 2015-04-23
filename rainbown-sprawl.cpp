@@ -5,51 +5,33 @@
 using namespace cv;
 using namespace std;
 
+void help();
+
+
 int main(int argc, char** argv)
 {
 
-    if(argc < 3)
+    if(argc < 3) {
+        help();
         return -1;
+    }
 
-    Mat img = imread(argv[1]);
-    Mat img2 = imread(argv[2]);
-
+    string img1 = argv[1];
+    string path = argv[2];
+    vector<string> images_path; 
+    cv::glob(path, images_path, false);
+    
     vector<Combination> combinations;
     generate_combinations(combinations);
 
-    ImageData data;
-    data.img1 = img;
-    data.img2 = img2;
+    vector<TestData> results;
+    run_tests(combinations,  img1, images_path, results);
 
-    cout << "\nRuning " << combinations.size() << "\n";
-
-    for (int i = 0; i < combinations.size(); ++i)
-    {
-        try
-        {
-            run_combination(combinations[i], data);
-        } 
-        catch(exception &e){}
-    }
-
-/*
-    vector<KeyPoint> key_points, key_points2;
-
-    detect_by(__SURF, img, key_points);
-    detect_by(__SIFT, img, key_points2);
-
-    Mat output_img, output_img2;
-    drawKeypoints(img, key_points, output_img);
-    drawKeypoints(img, key_points2, output_img2);
-
-    namedWindow("Image");
-    imshow("Image", output_img);
-    namedWindow("Image2");
-    imshow("Image2", output_img2);
-    waitKey(0);
-
-   
-    destroyWindow("Image2");
-*/
     return 0;
 }
+
+void help() {
+    cout << "Usage: " << endl;
+    cout << "./rainbown-sprawl image_to_find folder_with_images " << endl;
+}
+

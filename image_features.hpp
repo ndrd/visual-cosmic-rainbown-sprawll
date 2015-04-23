@@ -47,16 +47,17 @@ struct Combination
 	Matcher matcher;
 };
 
-struct ImageData
+struct TestData
 {
-	Mat img1;
-	Mat img2;
+	string image_1_name;
+	string image_2_name;
+	string combination_name;
 	vector<KeyPoint> kp1;
 	vector<KeyPoint> kp2;
 	Mat desc1;
 	Mat desc2;
 	vector<DMatch> matches;
-
+	double time;
 };
 
 
@@ -64,7 +65,10 @@ void detect_by(Detector type, Mat img, vector<KeyPoint> &keypoints);
 void descript_by(Descriptor type, Mat img, vector<KeyPoint> keypoints, Mat &descriptors);
 void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches);
 void generate_combinations(vector<Combination> &combs);
-void run_combination(Combination comb, ImageData data);
+void run_combination(Combination comb,Mat img1, Mat img2, vector<TestData> &data);
+void run_tests(vector<Combination> combs, string img1_path, vector<string> images, vector<TestData> &results);
+
 string combination_name(Combination comb);
+void print_results(TestData results);
 
 #endif
