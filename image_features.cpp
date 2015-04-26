@@ -163,28 +163,32 @@ void run_combination(Combination comb, Mat img1, Mat img2,  TestData &data)
 }
 
 void run_tests(vector<Combination> combinations, string image_path, 
-            vector<string> images_path, vector<TestData> &results)
+            vector<string> images_path, vector<TestData> &results, string path_name)
 {
     cout << "Running " << combinations.size() << " combinations "
         << " over " << images_path.size() << "images." << endl;
 
     Mat img1 = imread(image_path);
 
-    for (int i = 0; i < images_path.size(); ++i)
-    {
-        Mat img2 = imread(images_path[i]);
+    cout << image_path << " - " << path_name << endl;
 
-        for (int j = 0; j < combinations.size(); ++j)
+    for (int i = 0; i < combinations.size(); ++i)
+    {
+
+        for (int j = 0; j < images_path.size(); ++j)
         {
+        	Mat img2 = imread(images_path[j]);
+
             try
             {
             	TestData data;
 
         		data.image_1_name = image_path;
-        		data.image_2_name = images_path[i];
+        		data.image_2_name = images_path[j];
+        		data.combination_name = combination_name(combinations[i]);
 
                 run_combination(combinations[i], img1, img2, data);
-                print_results(data);
+                print_result(data);
                 results.push_back(data);
 
             } 
@@ -195,7 +199,56 @@ void run_tests(vector<Combination> combinations, string image_path,
 
 }
 
-void print_results(TestData data) {
+void print_results(vector<TestData> results) {
+	for (int i = 0; i < results.size(); ++i)
+	{
+		print_result(results[i]);
+	}
+}
+
+void default_combinations(vector<Combination> &combs) 
+{
+	Combination c1;
+	c1.detector = __SIFT;
+	c1.descriptor= _SIFT;
+	c1.matcher = BF;
+
+	Combination c2;
+	c2.detector = __SURF;
+	c2.descriptor = _SURF;
+	c2.matcher = BF;
+
+	Combination c3;
+	c3.detector = __SIFT;
+	c3.descriptor = _SURF;
+	c3.matcher = BF;
+
+	Combination c4;
+	c4.detector = __SURF;
+	c4.descriptor = _SIFT;
+	c4.matcher = BF;
+
+	Combination c5;
+	c5.detector = __FAST;
+	c5.descriptor = _ORB;
+	c5.matcher = BF_HAM2;
+
+	Combination c6;
+	c6.detector = __FAST;
+	c6.descriptor = _BRIEF;
+	c6.matcher = BF;
+
+	combs.push_back(c1);
+	combs.push_back(c2);
+	combs.push_back(c3);
+	combs.push_back(c4);
+	combs.push_back(c5);
+	combs.push_back(c6);
+
+}
+
+
+void print_result(TestData data) {
 	cout << data.combination_name << " with " << data.image_1_name << " and "
 		<< data.image_2_name << " find " << data.matches.size() << " matches, takes " << data.time << " seconds" << endl;
 }

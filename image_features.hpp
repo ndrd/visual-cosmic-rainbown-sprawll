@@ -58,6 +58,7 @@ struct TestData
 	Mat desc2;
 	vector<DMatch> matches;
 	double time;
+	bool expectedDetect;
 };
 
 
@@ -66,9 +67,11 @@ void descript_by(Descriptor type, Mat img, vector<KeyPoint> keypoints, Mat &desc
 void match_by(Matcher type, Mat descriptor1, Mat descriptor2, vector<DMatch> &matches);
 void generate_combinations(vector<Combination> &combs);
 void run_combination(Combination comb,Mat img1, Mat img2, vector<TestData> &data);
-void run_tests(vector<Combination> combs, string img1_path, vector<string> images, vector<TestData> &results);
+void run_tests(vector<Combination> combs, string img1_path, vector<string> images, vector<TestData> &results, string path_name);
+void print_results(vector<TestData> results);
+void default_combinations(vector<Combination> &combs);
 
 string combination_name(Combination comb);
-void print_results(TestData results);
+void print_result(TestData results);
 
 #endif
